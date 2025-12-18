@@ -57,10 +57,10 @@ body {
 .logo span { color: var(--accent); }
 
 .hero {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 28px;
-  align-items: flex-start;
+  align-items: center;
   padding: 80px 6vw 40px;
   margin: 0 auto;
 }
@@ -318,6 +318,23 @@ body {
 }
 .kit-grid h3 { margin: 8px 0; }
 .kit-grid p { color: var(--muted); }
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: #04060c;
+}
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #04060c;
+}
+.hero__media { width: 100%; }
 
 @media (max-width: 720px) {
   .nav { gap: 10px; }

@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mario: Starbound Sprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons@4.29.2/dist/feather.min.js"></script>
+  <style>
+:root {
+  --bg: #05060b;
+  --bg-2: #0a0f1f;
+  --primary: #ff3b3b;
+  --accent: #ffd447;
+  --blue: #4b7bff;
+  --text: #e8ecff;
+  --muted: #b4bed8;
+  --card: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 18px;
+  --shadow: 0 25px 80px rgba(0,0,0,0.35);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', 'Manrope', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 15% 20%, rgba(255, 213, 71, 0.12), transparent 30%),
+              radial-gradient(circle at 80% 0%, rgba(75, 123, 255, 0.18), transparent 30%),
+              linear-gradient(140deg, #0b1021 0%, #060810 45%, #05060b 100%);
+  color: var(--text);
+  line-height: 1.6;
+  padding-bottom: 80px;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 6vw;
+  background: rgba(5, 6, 11, 0.8);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.nav nav { display: flex; gap: 20px; }
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+.nav a:hover { color: var(--text); }
+.logo {
+  font-family: 'Press Start 2P', 'Space Grotesk', monospace;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+.logo span { color: var(--accent); }
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: center;
+  gap: 40px;
+  padding: 80px 6vw 40px;
+}
+.hero__content h1 {
+  font-size: clamp(44px, 6vw, 64px);
+  margin: 6px 0 16px;
+  line-height: 1.05;
+}
+.hero__content .lede { max-width: 600px; color: var(--muted); }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.lede { color: var(--muted); }
+
+.btn {
+  appearance: none;
+  border: none;
+  background: linear-gradient(130deg, var(--primary), #ff6c4d);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(255, 59, 59, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.02); }
+.btn:active { transform: translateY(0); box-shadow: 0 8px 16px rgba(255, 59, 59, 0.4); }
+.btn.ghost {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: none;
+  border: 1px solid var(--border);
+}
+.cta-group { display: flex; gap: 12px; flex-wrap: wrap; margin: 18px 0 10px; }
+
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.mini-stats div {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--muted);
+  font-weight: 600;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.mini-stats span { display: block; color: var(--text); font-size: 18px; }
+.mini-stats i { color: var(--accent); }
+
+.hero__visual {
+  position: relative;
+  min-height: 380px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 212, 71, 0.15), transparent 40%),
+              radial-gradient(circle at 70% 20%, rgba(75, 123, 255, 0.25), transparent 45%),
+              linear-gradient(160deg, #0e1c3a 0%, #0a0f1f 50%, #0b1026 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  filter: drop-shadow(0 18px 35px rgba(0,0,0,0.25));
+}
+.planet--one {
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, #ff7e5f 0%, #ff3b3b 55%, #d71e29 100%);
+  top: 18%; left: 10%;
+}
+.planet--two {
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, #4b7bff 0%, #3958e6 55%, #2334b8 100%);
+  bottom: 18%; right: 10%;
+}
+.planet--three {
+  width: 90px; height: 90px;
+  background: radial-gradient(circle, #ffd447 0%, #f6a93b 70%, #e9770a 100%);
+  top: 55%; left: 55%;
+}
+.runner {
+  position: absolute;
+  left: 42%; top: 52%;
+  transform: translate(-50%, -50%);
+  width: 160px; height: 160px;
+}
+.runner__body, .runner__cap {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 2.8s ease-in-out infinite;
+}
+.runner__body {
+  width: 100px; height: 100px;
+  background: linear-gradient(140deg, #0c94ff 0%, #0b5bd7 60%);
+  left: 30px; top: 40px;
+  transform: rotate(-12deg);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.3);
+}
+.runner__cap {
+  width: 120px; height: 60px;
+  background: linear-gradient(130deg, #ff3b3b 0%, #d71e29 70%);
+  top: 15px; left: 20px;
+  border-radius: 60px 60px 28px 28px;
+  animation-delay: -0.8s;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+}
+.coin {
+  position: absolute;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff5c4 0%, #ffd447 60%, #e2a624 100%);
+  border: 1px solid rgba(0,0,0,0.15);
+  animation: spin 1.8s linear infinite;
+  top: calc(10% + var(--i) * 18%);
+  left: calc(70% + (var(--i) * 6%));
+}
+
+.panel {
+  padding: 60px 6vw;
+}
+.panel__title { max-width: 720px; margin-bottom: 22px; }
+.panel h2 { font-size: clamp(28px, 5vw, 40px); margin: 10px 0 8px; }
+
+.grid.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.grid.features article {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.grid.features h3 { margin: 8px 0; }
+.grid.features p { color: var(--muted); }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 212, 71, 0.12);
+  border: 1px solid rgba(255, 212, 71, 0.35);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+}
+.chip i { width: 16px; height: 16px; }
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+.list { display: grid; gap: 12px; margin-top: 12px; }
+.list > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+.list span { font-size: 24px; }
+.list p { color: var(--muted); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.card ul { padding-left: 18px; color: var(--muted); }
+.card li { margin: 8px 0; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.highlight { border: 1px solid rgba(255, 212, 71, 0.6); box-shadow: 0 16px 40px rgba(255, 212, 71, 0.15); }
+.pill {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 212, 71, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(255, 212, 71, 0.4);
+  font-weight: 700;
+}
+
+.form {
+  background: linear-gradient(150deg, rgba(11, 23, 54, 0.9), rgba(9, 12, 24, 0.95));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.form label {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+  font-weight: 700;
+}
+.form input, .form select {
+  padding: 12px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-size: 15px;
+}
+.form__status { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+.cta-note { color: var(--muted); margin-top: 12px; }
+.progress {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.progress div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-weight: 700;
+}
+.progress i { color: var(--accent); }
+
+.footer {
+  padding: 40px 6vw;
+  border-top: 1px solid var(--border);
+  background: rgba(5,6,11,0.9);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  align-items: center;
+}
+.footer__links { display: flex; gap: 12px; flex-wrap: wrap; }
+.footer__links a { color: var(--muted); text-decoration: none; font-weight: 700; }
+.footer__links a:hover { color: var(--text); }
+.footer__legal { color: var(--muted); margin: 0; }
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.modes article {
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.22);
+}
+.modes h3 { margin: 8px 0; }
+.modes p { color: var(--muted); }
+.modes i { color: var(--accent); }
+
+.accordion details {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+.accordion summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 700;
+}
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion p { color: var(--muted); margin: 8px 0 0; }
+.accordion i { color: var(--accent); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-12deg); }
+  50% { transform: translateY(-10px) rotate(-8deg); }
+}
+@keyframes spin {
+  0% { transform: translateY(0) rotateY(0deg); opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-14px) rotateY(360deg); opacity: 0.8; }
+}
+
+@media (max-width: 720px) {
+  .nav { gap: 10px; }
+  .nav nav { display: none; }
+  .hero { padding-top: 40px; }
+  .hero__visual { min-height: 280px; }
+  .runner { left: 50%; }
+}
+  </style>
+</head>
+<body>
+    <nav>
+      <a href="#fitur">Fitur</a>
+      <a href="#kisah">Kisah</a>
+      <a href="#level">Level</a>
+      <a href="#cta">Mainkan</a>
+    </nav>
+    <button class="btn ghost" onclick="scrollToCTA()">Pre-order</button>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero__content">
+      <p class="tag">Mario kembali dengan kecepatan kosmik</p>
+      <h1>Starbound Sprint</h1>
+      <p class="lede">Berlari, melompat, dan meluncur di antara planet mini bergravitasi ganda. Kumpulkan Star Shards, hindari Koopa Armada, dan selamatkan Kerajaan Jamur dalam gaya arcade modern.</p>
+      <div class="cta-group">
+        <a class="btn" href="#cta">Mainkan Gratis</a>
+        <a class="btn ghost" href="#kisah">Lihat kisah</a>
+      </div>
+      <div class="mini-stats">
+        <div><i data-feather="globe"></i><span>25+</span> level galaksi</div>
+        <div><i data-feather="zap"></i><span>6</span> power-up baru</div>
+        <div><i data-feather="users"></i><span>Multiplayer</span> co-op drop-in</div>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="planet planet--one"></div>
+      <div class="planet planet--two"></div>
+      <div class="planet planet--three"></div>
+      <div class="runner">
+        <div class="runner__body"></div>
+        <div class="runner__cap"></div>
+      </div>
+      <div class="coin" style="--i:0"></div>
+      <div class="coin" style="--i:1"></div>
+      <div class="coin" style="--i:2"></div>
+      <div class="coin" style="--i:3"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="fitur">
+    <div class="panel__title">
+      <p class="tag">Kenapa seru?</p>
+      <h2>Platforming retro dengan sentuhan orbit</h2>
+      <p class="lede">Gerakan khas Mario plus fisika gravitasi 360°, dirancang untuk kontrol sentuh dan gamepad. Kini ditambah skor dinamis, papan skor global, dan mode co-op drop-in yang membuat tiap putaran berbeda.</p>
+    </div>
+    <div class="grid features">
+      <article>
+        <div class="chip"><i data-feather="activity"></i> Fisika</div>
+        <h3>Gravitasi Ganda</h3>
+        <p>Loncat dari planet mini ke planet lain dan gunakan pusaran gravitasi untuk melayang.</p>
+      </article>
+      <article>
+        <div class="chip"><i data-feather="users"></i> Co-op</div>
+        <h3>Multiplayer Drop-in</h3>
+        <p>Teman bisa langsung bergabung tanpa menu panjang; satu ketuk untuk co-op.</p>
+      </article>
+      <article>
+        <div class="chip"><i data-feather="aperture"></i> Power-up</div>
+        <h3>Power-up Baru</h3>
+        <p>Starboard Jet, Cosmic Cape, dan Time Toadstool membuka jalur rahasia.</p>
+      </article>
+      <article>
+        <div class="chip"><i data-feather="clock"></i> Speedrun</div>
+        <h3>Speedrun Mode</h3>
+        <p>Papan skor global dengan seed level harian untuk pemburu rekor.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel split" id="kisah">
+    <div>
+      <p class="tag">Kisah</p>
+      <h2>Koopa Armada mencuri bintang penjaga langit.</h2>
+      <p>Mario, Luigi, dan Peach harus mengejar Bowser melalui sabuk asteroid berwarna neon. Setiap bintang yang dikembalikan memulihkan potongan musik orkestra yang mengiringi level—suara adalah bagian dari teka-teki.</p>
+      <div class="list">
+        <div>
+          <span>🎵</span>
+          <div>
+            <h4>Teka-teki musik</h4>
+            <p>Buka platform tersembunyi dengan ritme lompatan yang tepat.</p>
+          </div>
+        </div>
+        <div>
+          <span>🛰️</span>
+          <div>
+            <h4>Galaxy hub</h4>
+            <p>Fasilitas hub yang bisa dikembangkan jadi taman interaktif.</p>
+          </div>
+        </div>
+        <div>
+          <span>🌟</span>
+          <div>
+            <h4>Star shards</h4>
+            <p>Kumpulkan 120 pecahan bintang untuk membuka ending rahasia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Cuplikan singkat</h3>
+      <ul>
+        <li><strong>Prolog:</strong> Bowser menutup langit malam; Mario memulai di Toad Town.</li>
+        <li><strong>World 3:</strong> Aurora Speedway dengan lintasan vertikal.</li>
+        <li><strong>World 5:</strong> Komet es yang retak, waktu membeku setiap 8 detik.</li>
+        <li><strong>Finale:</strong> Duel di inti bintang yang bergulung.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" id="mode">
+    <div class="panel__title">
+      <p class="tag">Mode permainan</p>
+      <h2>Pilih gaya main favoritmu</h2>
+      <p class="lede">Main santai, balapan waktu, atau tantang teman. Semua progres sinkron antar perangkat.</p>
+    </div>
+    <div class="modes">
+      <article>
+        <i data-feather="sunrise"></i>
+        <h3>Story</h3>
+        <p>Ikuti alur sinematik penuh dialog ringan dan misi sampingan.</p>
+      </article>
+      <article>
+        <i data-feather="flag"></i>
+        <h3>Speedrun</h3>
+        <p>Seed harian, papan skor global, dan ghost replay untuk belajar rute.</p>
+      </article>
+      <article>
+        <i data-feather="headphones"></i>
+        <h3>Music Remix</h3>
+        <p>Level dengan beat tracker; lompatan presisi memberi bonus skor musik.</p>
+      </article>
+      <article>
+        <i data-feather="shield"></i>
+        <h3>Party Co-op</h3>
+        <p>Drop-in/drop-out, share power-up, dan tantangan tim mingguan.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel" id="level">
+    <div class="panel__title">
+      <p class="tag">Level & Mode</p>
+      <h2>Jelajahi tiga rasa utama</h2>
+      <p class="lede">Tiap dunia punya mekanik unik agar pemain tidak hanya berlari lurus.</p>
+    </div>
+    <div class="cards">
+      <article class="card highlight">
+        <h3>Orbital Parade</h3>
+        <p>Planet kecil saling tarik-menarik. Lompatan harus diatur agar tidak terlempar keluar.</p>
+        <div class="pill">Gravitasi adaptif</div>
+      </article>
+      <article class="card">
+        <h3>Forge Volcano</h3>
+        <p>Gunakan Starboard Jet untuk meluncur di atas lava yang naik-turun.</p>
+        <div class="pill">Dash & hover</div>
+      </article>
+      <article class="card">
+        <h3>Neon Nimbus</h3>
+        <p>Awan neon yang dapat digambar ulang menjadi platform menggunakan Cosmic Cape.</p>
+        <div class="pill">Platform dinamis</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel split" id="cta">
+    <div>
+      <p class="tag">Main lebih awal</p>
+      <h2>Gabung uji coba gratis dan simpan progress.</h2>
+      <p>Demo gratis tersedia di Steam dan Google Play. Progres akan dibawa ke versi penuh saat rilis.</p>
+      <div class="cta-group">
+        <a class="btn" href="#" onclick="alert('Demo Steam akan tersedia setelah rilis internal.'); return false;">Wishlist di Steam</a>
+        <a class="btn ghost" href="#" onclick="alert('Demo Google Play akan tersedia setelah rilis internal.'); return false;">Pra-daftar di Google Play</a>
+      </div>
+      <div class="cta-note">Tidak ada iklan. Seluruh konten pasca rilis bisa dibuka lewat gameplay.</div>
+      <div class="progress">
+        <div><i data-feather="zap"></i> Build beta 0.9.2</div>
+        <div><i data-feather="calendar"></i> Target rilis Q2</div>
+        <div><i data-feather="check-circle"></i> 18/25 level siap</div>
+      </div>
+    </div>
+    <form class="form" onsubmit="handleSubmit(event)">
+      <h3>Daftar akses awal</h3>
+      <label>
+        Nama
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Platform pilihan
+        <select name="platform">
+          <option>Steam</option>
+          <option>Google Play</option>
+          <option>Keduanya</option>
+        </select>
+      </label>
+      <button class="btn" type="submit">Kirim</button>
+      <p class="form__status" id="formStatus">Kami tidak akan spam.</p>
+    </form>
+  </section>
+
+  <section class="panel split" id="faq">
+    <div>
+      <p class="tag">FAQ</p>
+      <h2>Pertanyaan populer</h2>
+      <p class="lede">Jawaban cepat supaya kamu bisa langsung lompat ke permainan.</p>
+    </div>
+    <div class="accordion">
+      <details open>
+        <summary><i data-feather="download-cloud"></i> Apakah demo gratis?</summary>
+        <p>Ya, demo gratis di Steam dan Google Play. Progres dibawa ke versi penuh.</p>
+      </details>
+      <details>
+        <summary><i data-feather="smartphone"></i> Apakah dukung kontroler?</summary>
+        <p>Ya, gamepad Bluetooth didukung di mobile dan PC.</p>
+      </details>
+      <details>
+        <summary><i data-feather="wifi"></i> Bisa offline?</summary>
+        <p>Story bisa offline. Leaderboard dan co-op memerlukan koneksi.</p>
+      </details>
+      <details>
+        <summary><i data-feather="heart"></i> Apakah ada microtransaction?</summary>
+        <p>Tidak. Semua konten dibuka lewat gameplay; tidak ada gacha.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <div class="logo">Starbound <span>Sprint</span></div>
+      <p>Misi: menghadirkan platformer klasik dengan kecepatan kosmik dan fisika yang memanjakan pemain.</p>
+    </div>
+    <div class="footer__links">
+      <a href="#fitur">Fitur</a>
+      <a href="#kisah">Kisah</a>
+      <a href="#level">Level</a>
+      <a href="#cta">Wishlist</a>
+    </div>
+    <p class="footer__legal">Terinspirasi oleh semesta Mario. Ini adalah proyek fiktif untuk kebutuhan tugas.</p>
+  </footer>
+
+</body>
+</html>
+  <script>
+function handleSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  const status = document.getElementById('formStatus');
+  const name = form.name.value.trim();
+  const platform = form.platform.value;
+  status.textContent = `Halo ${name || 'teman'}! Kami akan mengirim undangan akses awal ke ${platform}.`;
+  status.style.color = '#ffd447';
+}
+
+function scrollToCTA() {
+  const cta = document.getElementById('cta');
+  if (cta) cta.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Simple parallax effect on coins
+const coins = document.querySelectorAll('.coin');
+window.addEventListener('scroll', () => {
+  const offset = window.scrollY * 0.08;
+  coins.forEach((coin, index) => {
+    coin.style.transform = `translateY(${offset + index * 4}px)`;
+  });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.feather) {
+    window.feather.replace();
+  }
+});
+  </script>
+</body>
+</html>

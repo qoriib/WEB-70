@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mario Sprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/feather-icons@4.29.2/dist/feather.min.js"></script>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">Mario <span>Sprint</span></div>
+    <nav>
+      <a href="#fitur">Fitur</a>
+      <a href="#kisah">Kisah</a>
+      <a href="#level">Level</a>
+      <a href="#cta">Mainkan</a>
+    </nav>
+    <button class="btn ghost" onclick="scrollToCTA()">Pre-order</button>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero__content">
+      <p class="tag">Mario kembali dengan kecepatan kosmik</p>
+      <h1>Mario Sprint</h1>
+      <p class="lede">Berlari, melompat, dan meluncur di antara planet mini bergravitasi ganda. Kumpulkan Star Shards, hindari Koopa Armada, dan selamatkan Kerajaan Jamur dalam gaya arcade modern.</p>
+      <div class="cta-group">
+        <a class="btn" href="#cta">Mainkan Gratis</a>
+        <a class="btn ghost" href="#kisah">Lihat kisah</a>
+      </div>
+      <div class="mini-stats">
+        <div><i data-feather="globe"></i><span>25+</span> level galaksi</div>
+        <div><i data-feather="zap"></i><span>6</span> power-up baru</div>
+        <div><i data-feather="users"></i><span>Multiplayer</span> co-op drop-in</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="fitur">
+    <div class="panel__title">
+      <p class="tag">Kenapa seru?</p>
+      <h2>Platforming retro dengan sentuhan orbit</h2>
+      <p class="lede">Gerakan khas Mario plus fisika gravitasi 360°, dirancang untuk kontrol sentuh dan gamepad. Kini ditambah skor dinamis, papan skor global, dan mode co-op drop-in yang membuat tiap putaran berbeda.</p>
+    </div>
+    <div class="grid features">
+      <article>
+        <div class="chip"><i data-feather="activity"></i> Fisika</div>
+        <h3>Gravitasi Ganda</h3>
+        <p>Loncat dari planet mini ke planet lain dan gunakan pusaran gravitasi untuk melayang.</p>
+      </article>
+      <article>
+        <div class="chip"><i data-feather="users"></i> Co-op</div>
+        <h3>Multiplayer Drop-in</h3>
+        <p>Teman bisa langsung bergabung tanpa menu panjang; satu ketuk untuk co-op.</p>
+      </article>
+      <article>
+        <div class="chip"><i data-feather="aperture"></i> Power-up</div>
+        <h3>Power-up Baru</h3>
+        <p>Starboard Jet, Cosmic Cape, dan Time Toadstool membuka jalur rahasia.</p>
+      </article>
+      <article>
+        <div class="chip"><i data-feather="clock"></i> Speedrun</div>
+        <h3>Speedrun Mode</h3>
+        <p>Papan skor global dengan seed level harian untuk pemburu rekor.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel split" id="kisah">
+    <div>
+      <p class="tag">Kisah</p>
+      <h2>Koopa Armada mencuri bintang penjaga langit.</h2>
+      <p>Mario, Luigi, dan Peach harus mengejar Bowser melalui sabuk asteroid berwarna neon. Setiap bintang yang dikembalikan memulihkan potongan musik orkestra yang mengiringi level—suara adalah bagian dari teka-teki.</p>
+      <div class="list">
+        <div>
+          <span>🎵</span>
+          <div>
+            <h4>Teka-teki musik</h4>
+            <p>Buka platform tersembunyi dengan ritme lompatan yang tepat.</p>
+          </div>
+        </div>
+        <div>
+          <span>🛰️</span>
+          <div>
+            <h4>Galaxy hub</h4>
+            <p>Fasilitas hub yang bisa dikembangkan jadi taman interaktif.</p>
+          </div>
+        </div>
+        <div>
+          <span>🌟</span>
+          <div>
+            <h4>Star shards</h4>
+            <p>Kumpulkan 120 pecahan bintang untuk membuka ending rahasia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Cuplikan singkat</h3>
+      <ul>
+        <li><strong>Prolog:</strong> Bowser menutup langit malam; Mario memulai di Toad Town.</li>
+        <li><strong>World 3:</strong> Aurora Speedway dengan lintasan vertikal.</li>
+        <li><strong>World 5:</strong> Komet es yang retak, waktu membeku setiap 8 detik.</li>
+        <li><strong>Finale:</strong> Duel di inti bintang yang bergulung.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" id="mode">
+    <div class="panel__title">
+      <p class="tag">Mode permainan</p>
+      <h2>Pilih gaya main favoritmu</h2>
+      <p class="lede">Main santai, balapan waktu, atau tantang teman. Semua progres sinkron antar perangkat.</p>
+    </div>
+    <div class="modes">
+      <article>
+        <i data-feather="sunrise"></i>
+        <h3>Story</h3>
+        <p>Ikuti alur sinematik penuh dialog ringan dan misi sampingan.</p>
+      </article>
+      <article>
+        <i data-feather="flag"></i>
+        <h3>Speedrun</h3>
+        <p>Seed harian, papan skor global, dan ghost replay untuk belajar rute.</p>
+      </article>
+      <article>
+        <i data-feather="headphones"></i>
+        <h3>Music Remix</h3>
+        <p>Level dengan beat tracker; lompatan presisi memberi bonus skor musik.</p>
+      </article>
+      <article>
+        <i data-feather="shield"></i>
+        <h3>Party Co-op</h3>
+        <p>Drop-in/drop-out, share power-up, dan tantangan tim mingguan.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel" id="level">
+    <div class="panel__title">
+      <p class="tag">Level & Mode</p>
+      <h2>Jelajahi tiga rasa utama</h2>
+      <p class="lede">Tiap dunia punya mekanik unik agar pemain tidak hanya berlari lurus.</p>
+    </div>
+    <div class="cards">
+      <article class="card highlight">
+        <h3>Orbital Parade</h3>
+        <p>Planet kecil saling tarik-menarik. Lompatan harus diatur agar tidak terlempar keluar.</p>
+        <div class="pill">Gravitasi adaptif</div>
+      </article>
+      <article class="card">
+        <h3>Forge Volcano</h3>
+        <p>Gunakan Starboard Jet untuk meluncur di atas lava yang naik-turun.</p>
+        <div class="pill">Dash & hover</div>
+      </article>
+      <article class="card">
+        <h3>Neon Nimbus</h3>
+        <p>Awan neon yang dapat digambar ulang menjadi platform menggunakan Cosmic Cape.</p>
+        <div class="pill">Platform dinamis</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel split" id="cta">
+    <div>
+      <p class="tag">Main lebih awal</p>
+      <h2>Gabung uji coba gratis dan simpan progress.</h2>
+      <p>Demo gratis tersedia di Steam dan Google Play. Progres akan dibawa ke versi penuh saat rilis.</p>
+      <div class="cta-group">
+        <a class="btn" href="#" onclick="alert('Demo Steam akan tersedia setelah rilis internal.'); return false;">Wishlist di Steam</a>
+        <a class="btn ghost" href="#" onclick="alert('Demo Google Play akan tersedia setelah rilis internal.'); return false;">Pra-daftar di Google Play</a>
+      </div>
+      <div class="cta-note">Tidak ada iklan. Seluruh konten pasca rilis bisa dibuka lewat gameplay.</div>
+      <div class="progress">
+        <div><i data-feather="zap"></i> Build beta 0.9.2</div>
+        <div><i data-feather="calendar"></i> Target rilis Q2</div>
+        <div><i data-feather="check-circle"></i> 18/25 level siap</div>
+      </div>
+    </div>
+    <form class="form" onsubmit="handleSubmit(event)">
+      <h3>Daftar akses awal</h3>
+      <label>
+        Nama
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Platform pilihan
+        <select name="platform">
+          <option>Steam</option>
+          <option>Google Play</option>
+          <option>Keduanya</option>
+        </select>
+      </label>
+      <button class="btn" type="submit">Kirim</button>
+      <p class="form__status" id="formStatus">Kami tidak akan spam.</p>
+    </form>
+  </section>
+
+  <section class="panel split" id="faq">
+    <div>
+      <p class="tag">FAQ</p>
+      <h2>Pertanyaan populer</h2>
+      <p class="lede">Jawaban cepat supaya kamu bisa langsung lompat ke permainan.</p>
+    </div>
+    <div class="accordion">
+      <details open>
+        <summary><i data-feather="download-cloud"></i> Apakah demo gratis?</summary>
+        <p>Ya, demo gratis di Steam dan Google Play. Progres dibawa ke versi penuh.</p>
+      </details>
+      <details>
+        <summary><i data-feather="smartphone"></i> Apakah dukung kontroler?</summary>
+        <p>Ya, gamepad Bluetooth didukung di mobile dan PC.</p>
+      </details>
+      <details>
+        <summary><i data-feather="wifi"></i> Bisa offline?</summary>
+        <p>Story bisa offline. Leaderboard dan co-op memerlukan koneksi.</p>
+      </details>
+      <details>
+        <summary><i data-feather="heart"></i> Apakah ada microtransaction?</summary>
+        <p>Tidak. Semua konten dibuka lewat gameplay; tidak ada gacha.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <div class="logo">Mario <span>Sprint</span></div>
+      <p>Misi: menghadirkan platformer klasik dengan kecepatan kosmik dan fisika yang memanjakan pemain.</p>
+    </div>
+    <div class="footer__links">
+      <a href="#fitur">Fitur</a>
+      <a href="#kisah">Kisah</a>
+      <a href="#level">Level</a>
+      <a href="#cta">Wishlist</a>
+    </div>
+    <p class="footer__legal">Terinspirasi oleh semesta Mario. Ini adalah proyek fiktif untuk kebutuhan tugas.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
